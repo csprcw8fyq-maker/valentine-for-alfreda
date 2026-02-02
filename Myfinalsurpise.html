@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Be My Valentine 💕</title>
+  <link rel="stylesheet" href="valentine.css" />
+</head>
+
+<body>
+
+  <!-- Background Music -->
+  <audio id="valentineMusic" src="music/kingston.mp3"></audio>
+
+  <!-- Message Card -->
+  <div class="card">
+    <h1>Hey Alfreda❤️</h1>
+    <p>Will you be my Valentine?</p>
+    <div class="buttons">
+      <button id="yes">Yes 💖</button>
+      <button id="no">No 😔</button>
+    </div>
+  </div>
+
+  <!-- Collage Section (hidden until YES) -->
+  <div class="collage-section hidden">
+    <h2 class="quote">“Every time I smile, believe me, you're the reason behind it.”</h2>
+    <div class="heart-collage">
+      <!-- Photos will be injected here -->
+    </div>
+    <p class="signature">Neo & Alfreda 💗</p>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById("yes");
+    const noBtn = document.getElementById("no");
+    const card = document.querySelector(".card");
+    const music = document.getElementById("valentineMusic");
+    const collageSection = document.querySelector(".collage-section");
+    const heartCollage = document.querySelector(".heart-collage");
+
+    let yesScale = 1;
+
+    noBtn.addEventListener("click", () => {
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 60);
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+      yesScale += 0.2;
+      yesBtn.style.transform = `scale(${yesScale})`;
+    });
+
+    yesBtn.addEventListener("click", () => {
+      card.innerHTML = `
+        <h1>Aww thank you for choosing me baby </h1>
+        <p class="love-text">
+          Your my love of my life 💞<br/>
+          I Love you so much my baby u deserve everything in this world💗
+        </p>
+        <p class="small">Happy Valentine’s Day 🧚</p>
+      `;
+
+      music.volume = 0.7;
+      music.play().catch(err => console.error("Music playback failed:", err));
+
+      collageSection.classList.remove("hidden");
+
+      const filenames = [
+        "5EAF739A-3F56-4BCD-9CF7-2679C371E46A.JPG",
+        "9ba2bb3d-cff0-490b-a740-7317df906ab2.JPG",
+        "677FE571-39B5-464F-8E66-7B25054C91C7.JPG",
+        "41012AE4-8B15-45A5-AD36-A1A9281B46C1.JPG",
+        "alfiendneo1.PNG",
+        "alfiendneo2.PNG",
+        "BBCEC24A-9AB9-47C3-9E0B-DF5ADEA16820.JPG",
+        "e0639525-16c1-47b5-a3de-b47f9888dbee.JPG",
+        "IMG_7793.jpg",
+        "IMG_7382.JPG",
+        "IMG_7401.JPG",
+        "IMG_7402.JPG",
+        "IMG_7403.JPG",
+        "IMG_7404.JPG",
+        "IMG_7632.jpg",
+        "IMG_7682.JPG",
+        "IMG_7683.JPG"
+      ];
+
+      filenames.forEach(name => {
+        const img = document.createElement("img");
+        img.src = `photos/${name}`;
+        img.alt = "us 💗";
+        heartCollage.appendChild(img);
+      });
+    });
+  </script>
+
+</body>
+</html>
